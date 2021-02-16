@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="app" class="d-flex flex-row">
+    <ComContainer :config="config" />
+    <div>
+      <div style="white-space: pre; height: 50vh; overflow: scroll">{{config|pretty}}</div>
+      <div style="white-space: pre; height: 50vh; overflow: scroll">{{selectedID}}</div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import ComContainer from "./components/com.container";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+    ComContainer,
+  },
+  filters: {
+    pretty: function(value) {
+      return JSON.stringify(value, null, 2);
+    }
+  },
+  computed:{
+    config(){
+      return this.$store.state.config;
+    },
+    selectedID(){
+      return this.$store.state.selectedID;
+    }
   }
 };
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
