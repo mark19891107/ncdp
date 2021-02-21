@@ -13,11 +13,11 @@
     <!-- <legend v-if="config.style === 'fieldset'">{{ config.legend }}</legend> -->
     <template v-for="c in config.elements">
       <ComContainer
-        v-if="c.component === 'container'"
+        v-if="c.component === 'Container'"
         :config="c"
         :key="c.id"
       />
-      <ComStatic v-else-if="c.component === 'static'" :config="c" :key="c.id" />
+      <ComStatic v-else-if="c.component === 'Static'" :config="c" :key="c.id" />
       <div v-else :key="c.id">{{ c.content }}</div>
     </template>
   </draggable>
