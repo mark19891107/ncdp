@@ -1,0 +1,22 @@
+{
+    "fields":[
+        {
+            "key":"name",
+            "title":"姓名"
+        },
+        {
+            "key":"age",
+            "title":"年齡"
+        }
+    ],
+    "data":[
+        {
+            "name":"Mark",
+            "age":31
+        },
+        {
+            "name":"bob",
+            "age":30
+        }
+    ]
+}
