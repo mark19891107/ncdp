@@ -56,6 +56,8 @@ export default {
             def[option.name] = [];
           } else if (option.type === "list") {
             def[option.name] = option.value.filter((v) => v.default)[0].value || "";
+          } else if (option.type === "text") {
+            def[option.name] = "預設文字";
           } else {
             def[option.name] = "";
           }

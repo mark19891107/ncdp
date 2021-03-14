@@ -1,7 +1,7 @@
 <template>
-  <div @click.stop="setFocus" v-if="config.style==='html'" v-html="config.content"></div>
-  <img @click.stop="setFocus" v-else-if="config.style==='image'" :src="config.src"/>
-  <div @click.stop="setFocus" v-else>{{config.content}}</div>
+  <div @click.stop="setFocus" :style="'text-align:'+config.align" v-if="config.style==='html'" v-html="config.content"></div>
+  <img @click.stop="setFocus" :style="'text-align:'+config.align" v-else-if="config.style==='image'" :src="config.src"/>
+  <div @click.stop="setFocus" :style="'text-align:'+config.align" v-else>{{config.content}}</div>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default {
     },
   methods: {
     setFocus() {
-      this.$store.commit("updateComponentByID", this.config.id)
+      this.$store.commit("updateSelectComponentID", this.config.id)
     },
   },
 }

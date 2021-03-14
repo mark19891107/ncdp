@@ -18,17 +18,20 @@
         :key="c.id"
       />
       <ComStatic v-else-if="c.component === 'Static'" :config="c" :key="c.id" />
+      <ComTable v-else-if="c.component === 'Table'" :config="c" :key="c.id" />
       <div v-else :key="c.id">{{ c.content }}</div>
     </template>
   </draggable>
 </template>
 <script>
 import ComStatic from "./com.static";
+import ComTable from "./com.table";
 import draggable from "vuedraggable";
 export default {
   name: "ComContainer",
   components: {
     ComStatic,
+    ComTable,
     draggable,
   },
   props: {
@@ -36,8 +39,8 @@ export default {
   },
   methods: {
     setFocus() {
-      this.$store.commit("updateComponentByID", this.config.id)
-    },
+      this.$store.commit("updateSelectComponentID", this.config.id)
+    }
   },
   computed: {
     customClass() {

@@ -533,7 +533,7 @@ export default new Vuex.Store({
                 },
                 name: "content",
                 title: "內容",
-                type: "text",
+                type: "text"
               },
               {
                 name: "align",
@@ -642,95 +642,131 @@ export default new Vuex.Store({
         }
     },
     config: {
-      id: "main",
-      flex: 1,
-      component: "Container",
-      style: "normal",
-      align: "flexcol", // block inline flexcol flexrow
-      check: false,
-      legend: "標題",
-      elements: [
+      "id": "main",
+      "flex": 1,
+      "component": "Container",
+      "style": "normal",
+      "align": "flexcol",
+      "check": false,
+      "legend": "標題",
+      "elements": [
         {
-          id: "header",
-          class: ["navbar","navbar-light","bg-dark","text-white"],
-          component: "Container",
-          style: "normal",
-          align: "inline", // block inline flexcol flexrow
-          check: false,
-          legend: "header",
-          elements: [
-            {
-              component: "Static",
-              style: "html",
-              content: "<h1>NCDP Designer</h1>",
-            },
+          "id": "header",
+          "class": [
+            "navbar",
+            "navbar-light",
+            "bg-dark",
+            "text-white"
           ],
+          "component": "Container",
+          "style": "normal",
+          "align": "inline",
+          "check": false,
+          "legend": "header",
+          "elements": [
+            {
+              "id": "headerText",
+              "component": "Static",
+              "style": "html",
+              "content": "<h1>NCDP Designer</h1>"
+            }
+          ]
         },
         {
-          id: "body",
-          component: "Container",
-          class: ["mt-3"],
-          style: "normal",
-          align: "flexrow", // block inline flexcol flexrow
-          check: false,
-          legend: "body",
-          elements: [
+          "id": "Container_1615699738097",
+          "class": [],
+          "flex": "",
+          "component": "Container",
+          "style": "normal",
+          "align": "flexrow",
+          "check": false,
+          "legend": "預設文字",
+          "elements": [
             {
-              id: "menu",
-              component: "Container",
-              class: ["col-2"],
-              style: "normal",
-              align: "flexcol", // block inline flexcol flexrow
-              check: false,
-              legend: "menu",
-              elements: [
+              "id": "Container_1615699741030",
+              "class": [],
+              "flex": "2",
+              "component": "Container",
+              "style": "normal",
+              "align": "block",
+              "check": false,
+              "legend": "預設文字",
+              "elements": [
                 {
-                  component: "Static",
-                  style: "html",
-                  content: "<h5>系統連結</h5>",
+                  "id": "Static_1615699770404",
+                  "class": [],
+                  "flex": "",
+                  "component": "Static",
+                  "style": "text",
+                  "content": "系統連結",
+                  "align": "left",
+                  "src": ""
                 },
                 {
-                  component: "Static",
-                  style: "html",
-                  content: "<a href='1.html'>系統1</a>",
-                },
-                {
-                  component: "Static",
-                  style: "html",
-                  content: "<a href='1.html'>系統2</a>",
-                },
-                {
-                  component: "Static",
-                  style: "html",
-                  content: "<a href='1.html'>系統3</a>",
-                },
-              ],
+                  "id": "Static_1615699785428",
+                  "class": [],
+                  "flex": "",
+                  "component": "Static",
+                  "style": "html",
+                  "content": "<a href=\"\">system1</a>",
+                  "align": "left",
+                  "src": ""
+                }
+              ]
             },
             {
-              id: "content",
-              flex: 1,
-              component: "Container",
-              style: "normal",
-              align: "flexcol", // block inline flexcol flexrow
-              check: false,
-              legend: "content",
-              elements: [
+              "id": "Container_1615699758833",
+              "class": [],
+              "flex": "10",
+              "component": "Container",
+              "style": "normal",
+              "align": "block",
+              "check": false,
+              "legend": "預設文字",
+              "elements": [
                 {
-                  component: "Static",
-                  style: "html",
-                  content: "this is content",
-                  id: "contentHTML"
-                },
-              ],
-            },
-          ],
-        },
-      ],
+                  "id": "Table_1615699811195",
+                  "class": [],
+                  "flex": "",
+                  "component": "Table",
+                  "columns": [],
+                  "title": "預設文字",
+                  "src": "./table.json",
+                  "page": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
   },
   mutations: {
-    updateComponentByID(state, payload) {
+    updateSelectComponentID(state, payload) {
       state.selectedID = payload;
+    },
+    updateComponentByID(state, payload){
+
+      console.log(state)
+      console.log(payload)
+      if(payload.id !== undefined){
+        updateObjectByID(state.config, payload)
+      }
+      
+      function updateObjectByID(config, payload){
+        if(config.id === payload.id){
+          Object.keys(payload).forEach(key=>{
+            config[key] = payload[key]
+          })
+        }
+        else if(config.elements !== undefined && config.elements.length > 0){
+          for(let i = 0 ; i < config.elements.length ; i++){
+            updateObjectByID(config.elements[i], payload);
+          }
+        }
+      }
+
+
     }
   },
   actions: {},
